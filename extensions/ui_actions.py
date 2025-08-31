@@ -16,8 +16,5 @@ class UiActions:
     def mouse_hover(elem: WebElement):
         elem.click()
 
-    @staticmethod
-    def get_popup_text(driver:WebDriver):
-        popup = driver.switch_to.alert.text
-        print(f"The text is {popup}")
+
 

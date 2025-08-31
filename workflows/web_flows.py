@@ -2,6 +2,8 @@ import allure
 
 from extensions.ui_actions import UiActions
 import utilities.manage_pages as page
+from extensions.verifications import Verifications
+from test_cases.conftest import get_popup_text
 
 
 class WebFlows:
@@ -14,30 +16,21 @@ class WebFlows:
 
     @staticmethod
     @allure.step("Filling Out Contact Us Form")
-    def step_fill_contact_us_form(name,email,message):
+    def step_fill_contact_us_form(name, email, message):
         WebFlows.input_contact_name(name)
         WebFlows.input_contact_email(email)
         WebFlows.input_message(message)
 
     @staticmethod
+    @allure.step("Verifying Text In PopUp")
+    def step_verify_text_in_popup(expected_text):
+        actual_text = get_popup_text()
+        Verifications.verify_equals(actual_text, expected_text)
+
+    @staticmethod
     @allure.step("Clicking Send Message")
-    def step_click_send_message():
+    def click_send_message():
         UiActions.click(page.web_contact_us_page.get_send_message_button_element())
-
-    @staticmethod
-    @allure.step("Entering Message Text")
-    def input_message(message):
-        UiActions.update_text(page.web_contact_us_page.get_message_element(), message)
-
-    @staticmethod
-    @allure.step("Entering Contact Name")
-    def input_contact_name(name):
-        UiActions.update_text(page.web_contact_us_page.get_contact_name_element(), name)
-
-    @staticmethod
-    @allure.step("Entering Contact Email")
-    def input_contact_email(email):
-        UiActions.update_text(page.web_contact_us_page.get_contact_email_element(), email)
 
     @staticmethod
     @allure.step("Clicking Contact Us In The Top Navbar")
@@ -63,3 +56,15 @@ class WebFlows:
     @allure.step("Clicking Place Order Button")
     def step_click_place_order_button():
         UiActions.click(page.web_cart_page.get_place_order_button_element())
+
+    @staticmethod
+    def input_message(message):
+        UiActions.update_text(page.web_contact_us_page.get_message_element(), message)
+
+    @staticmethod
+    def input_contact_name(name):
+        UiActions.update_text(page.web_contact_us_page.get_contact_name_element(), name)
+
+    @staticmethod
+    def input_contact_email(email):
+        UiActions.update_text(page.web_contact_us_page.get_contact_email_element(), email)

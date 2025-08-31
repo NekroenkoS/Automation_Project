@@ -1,9 +1,7 @@
-import time
-
+import allure
 import pytest
 
-from extensions.ui_actions import UiActions
-from test_cases.conftest import get_data, driver
+from test_cases.conftest import get_data
 from workflows.web_flows import WebFlows
 
 name = get_data("NAME")
@@ -18,15 +16,14 @@ email = get_data("EMAIL")
 @pytest.mark.usefixtures("init_driver")
 class TestWeb:
 
+    @allure.title("Verify Contact Us Form Sent Successfully")
+    @allure.description("This test verifies that the contact us form is sent and there is a success message")
     def test_01_verify_contact_us(self):
         WebFlows.step_click_contact_us()
-        time.sleep(2)
         WebFlows.step_fill_contact_us_form(name, email, "Hello World!")
-        time.sleep(2)
-        WebFlows.step_click_send_message()
-        time.sleep(2)
-        UiActions.get_popup_text(driver)
-        time.sleep(2)
+        WebFlows.click_send_message()
+        WebFlows.step_verify_text_in_popup("Thanks for the message!!")
+
 
     # @allure.title("Test 2 - Verify Checkout Flow")
     # @allure.description("Verify checkout flow from beginning until the end")

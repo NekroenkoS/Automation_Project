@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 import pytest
 from selenium import webdriver
@@ -37,5 +38,8 @@ def get_web_driver():
 
 def get_data(node_name):
     root = ET.parse(
-        r"C:\Users\USER\PycharmProjects\Automation Project\configuration\configuration_for_blaze_testing.xml").getroot()
+        Path(__file__).parent.parent / 'configuration' / 'configuration_for_blaze_testing.xml')
     return root.find(".//" + node_name).text
+
+def get_popup_text():
+    return driver.switch_to.alert.text
