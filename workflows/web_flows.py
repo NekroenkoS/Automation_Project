@@ -15,4 +15,4 @@ class WebFlows:
     @staticmethod
     @allure.step("Click on Cart in the top navbar")
     def click_cart():
-        UiActions.click()
+        UiActions.click(page.web_top_nav_bar.get_cart_element())

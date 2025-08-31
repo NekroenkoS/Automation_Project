@@ -1,7 +1,6 @@
 
 import allure
 import pytest
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from test_cases.conftest import get_data
@@ -17,8 +16,6 @@ year_in_credit_card = get_data("YEAR_IN_CREDIT_CARD")
 @pytest.mark.usefixtures("init_driver")
 class TestWeb:
 
-    driver:WebDriver
-
     @allure.title("Verify Galaxy S6 Price In Cart")
     @allure.description("")
     def test_01_verify_samsung_galaxy_s6_price_in_cart(self):
@@ -33,17 +30,12 @@ class TestWeb:
     @allure.description("Verify checkout flow from beginning until the end")
     def test_02_verify_checkout_flow(self):
         WebFlows.step_add_samsung_to_cart()
-        self.step_click_on_cart()
+        WebFlows.click_cart()
         self.step_click_on_order()
         self.step_fill_out_form(name, country, city, credit_card, month_in_credit_card, year_in_credit_card)
         self.click_on_purchase()
         assert self.driver.find_element(By.CSS_SELECTOR,
                                    "div[class*='sweet-alert']>h2").text == "Thank you for your purchase!"
-
-
-    @allure.step("Click On Cart")
-    def step_click_on_cart(self):
-        self.driver.find_element(By.LINK_TEXT, "Cart").click()
 
     @allure.step("Click On Order Inside Cart")
     def step_click_on_order(self):
