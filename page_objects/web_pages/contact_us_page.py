@@ -6,6 +6,7 @@ contact_name = (By.ID, "recipient-name")
 message = (By.ID, "message-text")
 send_message_button = (By.CSS_SELECTOR, "button[onclick='send()']")
 
+
 class ContactUsPage:
     def __init__(self, driver: WebDriver):
         self.driver = driver

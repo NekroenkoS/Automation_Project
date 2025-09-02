@@ -12,6 +12,7 @@ from utilities.manage_pages import ManagePages
 driver = None
 web_driver = "Chrome"
 
+
 @pytest.fixture(scope='class')
 def init_driver(request):
     global driver
@@ -23,6 +24,7 @@ def init_driver(request):
     ManagePages.init_web_pages()
     yield
     driver.quit()
+
 
 def get_web_driver():
     if web_driver.lower() == "chrome":
@@ -36,10 +38,21 @@ def get_web_driver():
         raise Exception('Wrong input - unrecognized browser')
     return driver
 
+
+@pytest.fixture(scope="function")
+def go_home(init_driver):
+    driver.get(get_data("URL"))
+
+
 def get_data(node_name):
     root = ET.parse(
         Path(__file__).parent.parent / 'configuration' / 'configuration_for_blaze_testing.xml')
     return root.find(".//" + node_name).text
 
+
 def get_popup_text():
     return driver.switch_to.alert.text
+
+
+def dismiss_alert():
+    driver.switch_to.alert.dismiss()

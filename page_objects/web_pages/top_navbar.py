@@ -8,6 +8,7 @@ cart = (By.LINK_TEXT, "Cart")
 log_in = (By.LINK_TEXT, "Log in")
 sign_up = (By.LINK_TEXT, "Sign up")
 
+
 class TopNavBar:
     def __init__(self, driver: WebDriver):
         self.driver = driver

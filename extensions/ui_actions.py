@@ -1,4 +1,3 @@
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
 
@@ -15,6 +14,3 @@ class UiActions:
     @staticmethod
     def mouse_hover(elem: WebElement):
         elem.click()
-
-
-

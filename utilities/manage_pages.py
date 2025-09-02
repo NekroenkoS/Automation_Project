@@ -1,8 +1,10 @@
 import test_cases.conftest
+from page_objects.web_pages.after_purchase_page import AfterPurchasePage
 from page_objects.web_pages.cart_page import CartPage
 from page_objects.web_pages.contact_us_page import ContactUsPage
 from page_objects.web_pages.home_page import HomePage
 from page_objects.web_pages.login_page import LoginPage
+from page_objects.web_pages.place_order_page import PlaceOrderPage
 from page_objects.web_pages.product_page import ProductPage
 from page_objects.web_pages.top_navbar import TopNavBar
 
@@ -13,15 +15,19 @@ web_product_page = None
 web_top_nav_bar = None
 web_cart_page = None
 web_contact_us_page = None
+web_place_order_page = None
+web_after_purchase_page = None
 
 
 class ManagePages:
     @staticmethod
     def init_web_pages():
-        global web_login, web_home_page, web_product_page, web_top_nav_bar, web_cart_page, web_contact_us_page
+        global web_login, web_home_page, web_product_page, web_top_nav_bar, web_cart_page, web_contact_us_page, web_place_order_page, web_after_purchase_page
         web_login = LoginPage(test_cases.conftest.driver)
         web_home_page = HomePage(test_cases.conftest.driver)
         web_product_page = ProductPage(test_cases.conftest.driver)
         web_top_nav_bar = TopNavBar(test_cases.conftest.driver)
         web_cart_page = CartPage(test_cases.conftest.driver)
         web_contact_us_page = ContactUsPage(test_cases.conftest.driver)
+        web_place_order_page = PlaceOrderPage(test_cases.conftest.driver)
+        web_after_purchase_page = AfterPurchasePage(test_cases.conftest.driver)

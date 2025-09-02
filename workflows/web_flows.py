@@ -3,28 +3,23 @@ import allure
 from extensions.ui_actions import UiActions
 import utilities.manage_pages as page
 from extensions.verifications import Verifications
-from test_cases.conftest import get_popup_text
+from test_cases.conftest import get_popup_text, dismiss_alert
 
 
 class WebFlows:
 
     @staticmethod
-    @allure.step("Adding Samsung Galaxy S6 to cart")
-    def step_add_samsung_to_cart():
-        WebFlows.step_navigate_to_galaxy_s6_product_page()
-        WebFlows.step_click_add_to_cart()
-
-    @staticmethod
     @allure.step("Filling Out Contact Us Form")
     def step_fill_contact_us_form(name, email, message):
-        WebFlows.input_contact_name(name)
-        WebFlows.input_contact_email(email)
-        WebFlows.input_message(message)
+        UiActions.update_text(page.web_contact_us_page.get_contact_name_element(), name)
+        UiActions.update_text(page.web_contact_us_page.get_contact_email_element(), email)
+        UiActions.update_text(page.web_contact_us_page.get_message_element(), message)
 
     @staticmethod
-    @allure.step("Verifying Text In PopUp")
-    def step_verify_text_in_popup(expected_text):
+    @allure.step("Verifying Text In PopUp After Sending A Message In Contact Us")
+    def step_verify_text_in_popup_after_contact_us(expected_text):
         actual_text = get_popup_text()
+        dismiss_alert()
         Verifications.verify_equals(actual_text, expected_text)
 
     @staticmethod
@@ -58,13 +53,31 @@ class WebFlows:
         UiActions.click(page.web_cart_page.get_place_order_button_element())
 
     @staticmethod
-    def input_message(message):
-        UiActions.update_text(page.web_contact_us_page.get_message_element(), message)
+    @allure.step("Filling Product Order Form")
+    def step_fill_place_order_form(name, country, city, card, month, year):
+        UiActions.update_text(page.web_place_order_page.get_name_element(), name)
+        UiActions.update_text(page.web_place_order_page.get_country_element(), country)
+        UiActions.update_text(page.web_place_order_page.get_city_element(), city)
+        UiActions.update_text(page.web_place_order_page.get_credit_card_element(), card)
+        UiActions.update_text(page.web_place_order_page.get_credit_card_month_element(), month)
+        UiActions.update_text(page.web_place_order_page.get_credit_card_year_element(), year)
 
     @staticmethod
-    def input_contact_name(name):
-        UiActions.update_text(page.web_contact_us_page.get_contact_name_element(), name)
+    @allure.step("Clicking Purchase Inside Order Form")
+    def click_purchase():
+        UiActions.click(page.web_place_order_page.get_purchase_button_element())
 
     @staticmethod
-    def input_contact_email(email):
-        UiActions.update_text(page.web_contact_us_page.get_contact_email_element(), email)
+    @allure.step("Verifying Purchase Successful based on message")
+    def verify_header_text_after_purchase(expected_text_in_header):
+        actual_text_in_header = page.web_after_purchase_page.get_header_element().text
+        Verifications.verify_equals(actual_text_in_header, expected_text_in_header)
+
+    @staticmethod
+    def check_out_flow(name, country, city, card, month, year):
+        WebFlows.step_navigate_to_galaxy_s6_product_page()
+        WebFlows.step_click_add_to_cart()
+        WebFlows.step_click_cart_button()
+        WebFlows.step_click_place_order_button()
+        WebFlows.step_fill_place_order_form(name, country, city, card, month, year)
+        WebFlows.click_purchase()

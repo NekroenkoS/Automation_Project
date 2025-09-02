@@ -1,4 +1,3 @@
-import allure
 from selenium.webdriver.common.by import By
 
 add_to_cart_button = (By.LINK_TEXT, "Add to cart")

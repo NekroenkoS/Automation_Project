@@ -1,4 +1,3 @@
-import allure
 from selenium.webdriver.common.by import By
 
 galaxy_s6_product_page = (By.LINK_TEXT, "Samsung galaxy s6")
