@@ -7,10 +7,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
+from utilities.common_ops import get_data
 from utilities.manage_pages import ManagePages
 
 driver = None
-web_driver = "Chrome"
+web_driver = get_data("BROWSER")
 
 
 @pytest.fixture(scope='class')
@@ -18,7 +19,7 @@ def init_driver(request):
     global driver
     driver = get_web_driver()
     driver.maximize_window()
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(int(get_data("WAIT_TIME")))
     driver.get(get_data("URL"))
     request.cls.driver = driver
     ManagePages.init_web_pages()
@@ -44,15 +45,4 @@ def go_home(init_driver):
     driver.get(get_data("URL"))
 
 
-def get_data(node_name):
-    root = ET.parse(
-        Path(__file__).parent.parent / 'configuration' / 'configuration_for_blaze_testing.xml')
-    return root.find(".//" + node_name).text
 
-
-def get_popup_text():
-    return driver.switch_to.alert.text
-
-
-def dismiss_alert():
-    driver.switch_to.alert.dismiss()

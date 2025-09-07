@@ -1,7 +1,7 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-home = (By.LINK_TEXT, "Home ")
+home = (By.XPATH, "//*[@id='navbarExample']/ul/li[1]/a")
 contact = (By.LINK_TEXT, "Contact")
 about_us = (By.LINK_TEXT, "About us")
 cart = (By.LINK_TEXT, "Cart")

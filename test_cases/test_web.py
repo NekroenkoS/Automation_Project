@@ -29,3 +29,8 @@ class TestWeb:
     def test_02_verify_checkout_flow(self, go_home):
         WebFlows.check_out_flow(name, country, city, credit_card, month_in_credit_card, year_in_credit_card)
         WebFlows.verify_header_text_after_purchase("Thank you for your purchase!")
+
+    @allure.title("Test 3 - Verify All The Top Navbar Buttons Are Displayed")
+    @allure.description("This test verifies that all the buttons in the top navbar exist")
+    def test_03_verify_top_navbar_buttons_exist(self, go_home):
+        WebFlows.verify_top_navbar_links_exist()

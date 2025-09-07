@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<environment>
+<ENVIORNMENT>
+    <!-- General -->
+    <WAIT_TIME>5</WAIT_TIME>
+
+    <!-- Web -->
+    <BROWSER>Chrome</BROWSER>
     <URL>https://www.demoblaze.com/index.html</URL>
     <NAME>Sergey Nekroenko</NAME>
     <COUNTRY>Israel</COUNTRY>
@@ -8,4 +13,4 @@
     <MONTH_IN_CREDIT_CARD>12</MONTH_IN_CREDIT_CARD>
     <YEAR_IN_CREDIT_CARD>2025</YEAR_IN_CREDIT_CARD>
     <EMAIL>sergey@gmail.com</EMAIL>
-</environment>
+</ENVIORNMENT>

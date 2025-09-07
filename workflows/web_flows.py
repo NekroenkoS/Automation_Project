@@ -3,10 +3,23 @@ import allure
 from extensions.ui_actions import UiActions
 import utilities.manage_pages as page
 from extensions.verifications import Verifications
-from test_cases.conftest import get_popup_text, dismiss_alert
+from page_objects.web_pages.after_purchase_page import header
+from utilities.common_ops import wait, For, get_popup_text, dismiss_alert
 
 
 class WebFlows:
+
+    @staticmethod
+    @allure.step("Verifying All Buttons In The Upper Navbar Exist")
+    def verify_top_navbar_links_exist():
+        elems = [ page.web_top_nav_bar.get_home_element(),
+                  page.web_top_nav_bar.get_contact_element(),
+                  page.web_top_nav_bar.get_about_us_element(),
+                  page.web_top_nav_bar.get_cart_element(),
+                  page.web_top_nav_bar.get_login_element(),
+                  page.web_top_nav_bar.get_sign_up_element()
+        ]
+        Verifications.soft_displayed(elems)
 
     @staticmethod
     @allure.step("Filling Out Contact Us Form")
@@ -70,6 +83,7 @@ class WebFlows:
     @staticmethod
     @allure.step("Verifying Purchase Successful based on message")
     def verify_header_text_after_purchase(expected_text_in_header):
+        wait(For.ELEMENT_EXISTS, header)
         actual_text_in_header = page.web_after_purchase_page.get_header_element().text
         Verifications.verify_equals(actual_text_in_header, expected_text_in_header)
 
