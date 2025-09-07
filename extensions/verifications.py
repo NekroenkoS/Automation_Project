@@ -1,4 +1,5 @@
 from selenium.webdriver.remote.webelement import WebElement
+from smart_assertions import soft_assert, verify_expectations
 
 
 class Verifications:
@@ -11,13 +12,9 @@ class Verifications:
     def is_displayed(elem: WebElement):
         assert elem.is_displayed(), "is_displayed Failed - Element is not displayed"
 
+    # Verify top navbar buttons using smart-assert
     @staticmethod
-    def soft_displayed(elems):
-        failed_elems = []
+    def soft_assert(elems):
         for i in range(len(elems)):
-            if not elems[i].is_displayed():
-                failed_elems.insert(len(failed_elems), elems[i].text)
-        if len(failed_elems) > 0:
-            for failed_elem in failed_elems:
-                print(f"Soft display failed - Elements that failed {failed_elem}")
-                raise AssertionError("Soft display failed")
+            soft_assert(elems[i].is_displayed())
+        verify_expectations()

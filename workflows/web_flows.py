@@ -19,7 +19,7 @@ class WebFlows:
                   page.web_top_nav_bar.get_login_element(),
                   page.web_top_nav_bar.get_sign_up_element()
         ]
-        Verifications.soft_displayed(elems)
+        Verifications.soft_assert(elems)
 
     @staticmethod
     @allure.step("Filling Out Contact Us Form")
@@ -53,7 +53,7 @@ class WebFlows:
     @staticmethod
     @allure.step("Clicking Samsung Galaxy S6 Link")
     def step_navigate_to_galaxy_s6_product_page():
-        UiActions.click(page.web_home_page.get_samsung_galaxy_s6_product_page_element())
+        UiActions.click(page.web_home_page.get_product_page_element())
 
     @staticmethod
     @allure.step("Clicking Cart In The Top Navbar")
