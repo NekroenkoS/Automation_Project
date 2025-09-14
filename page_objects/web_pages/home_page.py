@@ -15,7 +15,10 @@ class HomePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def get_product_page_element(self, item):
+    def get_product_page_element(self,item):
+        return self.driver.find_element(item[0], item[1])
+
+    def get_samsung_galaxy_s6_product_page_element(self):
         return self.driver.find_element(galaxy_s6_product_page[0], galaxy_s6_product_page[1])
 
     def get_nokia_lumia_1520_product_page_element(self):

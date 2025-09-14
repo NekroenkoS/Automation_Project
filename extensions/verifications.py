@@ -9,6 +9,10 @@ class Verifications:
         assert actual == expected, f"Verify equals failed, actual: {actual} and expected is: {expected}"
 
     @staticmethod
+    def verify_exists_in(actual, expected):
+        assert expected in actual
+
+    @staticmethod
     def is_displayed(elem: WebElement):
         assert elem.is_displayed(), "is_displayed Failed - Element is not displayed"
 

@@ -7,6 +7,7 @@ about_us = (By.LINK_TEXT, "About us")
 cart = (By.LINK_TEXT, "Cart")
 log_in = (By.LINK_TEXT, "Log in")
 sign_up = (By.LINK_TEXT, "Sign up")
+user_name_after_sign_in = (By.ID, "nameofuser")
 
 
 class TopNavBar:
@@ -30,3 +31,6 @@ class TopNavBar:
 
     def get_sign_up_element(self):
         return self.driver.find_element(sign_up[0], sign_up[1])
+
+    def get_user_name_after_sign_in_element(self):
+        return self.driver.find_element(user_name_after_sign_in[0],user_name_after_sign_in[1])
