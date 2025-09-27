@@ -5,7 +5,7 @@
 
     <!-- Web -->
     <BROWSER>Chrome</BROWSER>
-    <URL>https://www.demoblaze.com/index.html</URL>
+    <WEB_URL>https://www.demoblaze.com/index.html</WEB_URL>
     <NAME>Sergey Nekroenko</NAME>
     <COUNTRY>Israel</COUNTRY>
     <CITY>petah tikva</CITY>
@@ -13,6 +13,19 @@
     <MONTH_IN_CREDIT_CARD>12</MONTH_IN_CREDIT_CARD>
     <YEAR_IN_CREDIT_CARD>2025</YEAR_IN_CREDIT_CARD>
     <EMAIL>sergey@gmail.com</EMAIL>
-    <USER_NAME>admin</USER_NAME>
-    <PASSWORD>admin</PASSWORD>
+    <WEB_USER_NAME>admin</WEB_USER_NAME>
+    <WEB_PASSWORD>admin</WEB_PASSWORD>
+
+    <!-- Mobile -->
+    <MOBILE_DEVICE>Android</MOBILE_DEVICE>
+    <UDID>RFCW61429JN</UDID>
+    <APP_PACKAGE>com.appiumpro.the_app</APP_PACKAGE>
+    <APP_ACTIVITY>.MainActivity</APP_ACTIVITY>
+    <APPIUM_SERVER>http://localhost:4723/wd/hub</APPIUM_SERVER>
+    <BUNDLE_ID>com.appiumpro.the_app</BUNDLE_ID>
+    <MOBILE_USER_NAME>alice</MOBILE_USER_NAME>
+    <MOBILE_PASSWORD>mypassword</MOBILE_PASSWORD>
+
+    <!-- API -->
+
 </ENVIORNMENT>

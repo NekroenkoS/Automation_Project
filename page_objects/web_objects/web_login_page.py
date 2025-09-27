@@ -6,7 +6,7 @@ password_locator = (By.ID, "loginpassword")
 log_in_button_locator = (By.CSS_SELECTOR, "button[onclick='logIn()']")
 
 
-class LoginPage:
+class WebLoginPage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
 

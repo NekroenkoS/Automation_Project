@@ -1,10 +1,10 @@
 import allure
 
-import page_objects.web_pages.top_navbar
+import page_objects.web_objects.top_navbar
 from extensions.ui_actions import UiActions
 import utilities.manage_pages as page
 from extensions.verifications import Verifications
-from page_objects.web_pages.after_purchase_page import header
+from page_objects.web_objects.after_purchase_page import header
 from utilities.common_ops import wait, For, get_popup_text, dismiss_alert
 
 
@@ -45,7 +45,7 @@ class WebFlows:
     @staticmethod
     @allure.step("Verifying login successfull")
     def verify_login_successful(expected_user_name):
-        wait(For.TEXT_TO_BE_PRESENT,page_objects.web_pages.top_navbar.user_name_after_sign_in,"Welcome")
+        wait(For.TEXT_TO_BE_PRESENT, page_objects.web_objects.top_navbar.user_name_after_sign_in, "Welcome")
         actual_text_after_login = page.web_top_nav_bar.get_user_name_after_sign_in_element().text
         Verifications.verify_exists_in(actual_text_after_login, expected_user_name)
 
@@ -130,5 +130,3 @@ class WebFlows:
         WebFlows.step_click_place_order_button()
         WebFlows.step_fill_place_order_form(name, country, city, card, month, year)
         WebFlows.click_purchase()
-
-
