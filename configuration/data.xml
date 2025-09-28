@@ -27,5 +27,10 @@
     <MOBILE_PASSWORD>mypassword</MOBILE_PASSWORD>
 
     <!-- API -->
-
+    <BASE_URL>https://reqres.in/</BASE_URL>
+    <API_EMAIL>janet.weaver@reqres.in</API_EMAIL>
+    <API_NAME>Sergey</API_NAME>
+    <JOB>Automation</JOB>
+    <API_LOGIN_EMAIL>eve.holt@reqres.in</API_LOGIN_EMAIL>
+    <API_LOGIN_PASSWORD>cityslicka</API_LOGIN_PASSWORD>
 </ENVIORNMENT>

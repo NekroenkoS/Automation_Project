@@ -41,7 +41,6 @@ class MobileFlows:
     @staticmethod
     @allure.step("Inputting Message")
     def step_input_message(message):
-        MobileActions.tap(page.mobile_echo_screen_page.get_input_message_element(), 1)
         MobileActions.update_text(page.mobile_echo_screen_page.get_input_message_element(), message)
 
     @staticmethod
@@ -57,13 +56,11 @@ class MobileFlows:
     @staticmethod
     @allure.step("Inputting User Name")
     def step_input_user_name(user_name):
-        MobileActions.tap(page.mobile_login_page.get_user_name_element(), 1)
         MobileActions.update_text(page.mobile_login_page.get_user_name_element(), user_name)
 
     @staticmethod
     @allure.step("Inputting Password")
     def step_input_password(password):
-        MobileActions.tap(page.mobile_login_page.get_password_element(), 1)
         MobileActions.update_text(page.mobile_login_page.get_password_element(), password)
 
     @staticmethod
