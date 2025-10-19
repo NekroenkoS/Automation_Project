@@ -3,8 +3,10 @@ from pathlib import Path
 
 import appium.webdriver
 import pytest
+import selenium
 from appium.webdriver.common.touch_action import TouchAction
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.event_firing_webdriver import EventFiringWebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
@@ -50,6 +52,18 @@ def init_mobile_driver(request):
     yield
     driver.quit()
 
+@pytest.fixture(scope='class')
+def init_electron_driver(request):
+    edriver = get_electron_driver()
+    global driver, action
+    driver = EventFiringWebDriver(edriver, EventListener())
+    driver.implicitly_wait(int(get_data("WAIT_TIME")))
+    request.cls.driver = driver
+    action = ActionChains(driver)
+    request.cls.action = action
+    ManagePages.init_electron_pages()
+    yield
+    driver.quit()
 
 def get_web_driver():
     if web_driver.lower() == "chrome":
@@ -74,6 +88,11 @@ def get_mobile_driver():
         raise Exception("Wrong Input, Driver Is None")
     return driver
 
+def get_electron_driver():
+    options = selenium.webdriver.ChromeOptions()
+    options.binary_location = get_data("ELECTRON_APP")
+    driver = selenium.webdriver.Chrome(chrome_options=options, executable_path=get_data("ELECTRON_DRIVER"))
+    return driver
 
 def get_android(udid):
     dc = {}

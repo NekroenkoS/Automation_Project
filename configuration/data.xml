@@ -33,4 +33,8 @@
     <JOB>Automation</JOB>
     <API_LOGIN_EMAIL>eve.holt@reqres.in</API_LOGIN_EMAIL>
     <API_LOGIN_PASSWORD>cityslicka</API_LOGIN_PASSWORD>
+
+    <!-- Electron -->
+    <ELECTRON_APP>C:/Users/USER/AppData/Local/Programs/todolist/Todolist.exe</ELECTRON_APP>
+    <ELECTRON_DRIVER>C:/Users/USER/PycharmProjects/electrondriver.exe</ELECTRON_DRIVER>
 </ENVIORNMENT>

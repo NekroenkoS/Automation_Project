@@ -1,4 +1,5 @@
 import test_cases.conftest
+from page_objects.electron_objects.task_page import TaskPage
 from page_objects.mobile_objects.after_login_page import AfterLoginPage
 from page_objects.mobile_objects.echo_screen_page import EchoScreenPage
 from page_objects.mobile_objects.list_demo_page import ListDemoPage
@@ -30,6 +31,9 @@ mobile_login_page = None
 mobile_main_page = None
 mobile_list_demo_page = None
 
+# Electron Objects
+electron_task_page = None
+
 
 class ManagePages:
     @staticmethod
@@ -52,3 +56,8 @@ class ManagePages:
         mobile_login_page = MobileLoginPage(test_cases.conftest.driver)
         mobile_main_page = MainPage(test_cases.conftest.driver)
         mobile_list_demo_page = ListDemoPage(test_cases.conftest.driver)
+
+    @staticmethod
+    def init_electron_pages():
+        global electron_task_page
+        electron_task_page = TaskPage(test_cases.conftest.driver)

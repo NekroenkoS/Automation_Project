@@ -10,7 +10,3 @@ class UiActions:
     @staticmethod
     def update_text(elem: WebElement, value):
         elem.send_keys(value)
-
-    @staticmethod
-    def mouse_hover(elem: WebElement):
-        elem.click()
