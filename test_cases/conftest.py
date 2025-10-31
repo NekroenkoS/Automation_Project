@@ -112,12 +112,12 @@ def get_ios(udid):
     ios_driver = appium.webdriver.Remote(get_data("APPIUM_SERVER"), dc)
     return ios_driver
 
-
+# Returns back to home web site
 @pytest.fixture(scope="function")
 def go_home(init_web_driver):
     driver.get(get_data("WEB_URL"))
 
-
+# Resets mobile APP
 @pytest.fixture(scope="function")
 def reset_app(init_mobile_driver):
     driver.reset()
