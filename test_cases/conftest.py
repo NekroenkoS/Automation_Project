@@ -65,6 +65,18 @@ def init_electron_driver(request):
     yield
     driver.quit()
 
+@pytest.fixture(scope='class')
+def init_desktop_driver(request):
+    edriver = get_desktop_driver()
+    global driver, action
+    driver = EventFiringWebDriver(edriver, EventListener())
+    driver.implicitly_wait(int(get_data("WAIT_TIME")))
+    request.cls.driver = driver
+    ManagePages.init_desktop_pages()
+    yield
+    driver.quit()
+
+
 def get_web_driver():
     if web_driver.lower() == "chrome":
         driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -92,6 +104,14 @@ def get_electron_driver():
     options = selenium.webdriver.ChromeOptions()
     options.binary_location = get_data("ELECTRON_APP")
     driver = selenium.webdriver.Chrome(chrome_options=options, executable_path=get_data("ELECTRON_DRIVER"))
+    return driver
+
+def get_desktop_driver():
+    dc = {}
+    dc['app'] = get_data("APPLICATION_NAME")
+    dc['platformName'] = "Windows"
+    dc['deviceName'] = "WindowsPC"
+    driver = appium.webdriver.Remote(get_data("WINAPP_DRIVER_SERVICE"),dc)
     return driver
 
 def get_android(udid):

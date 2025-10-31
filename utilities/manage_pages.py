@@ -1,4 +1,5 @@
 import test_cases.conftest
+from page_objects.desktop_objects.standard_page import StandardPage
 from page_objects.electron_objects.task_page import TaskPage
 from page_objects.mobile_objects.after_login_page import AfterLoginPage
 from page_objects.mobile_objects.echo_screen_page import EchoScreenPage
@@ -34,6 +35,9 @@ mobile_list_demo_page = None
 # Electron Objects
 electron_task_page = None
 
+# Desktop Objects
+calculator_standard_page = None
+
 
 class ManagePages:
     @staticmethod
@@ -61,3 +65,8 @@ class ManagePages:
     def init_electron_pages():
         global electron_task_page
         electron_task_page = TaskPage(test_cases.conftest.driver)
+
+    @staticmethod
+    def init_desktop_pages():
+        global calculator_standard_page
+        calculator_standard_page = StandardPage(test_cases.conftest.driver)
