@@ -21,7 +21,7 @@ decimal = (By.NAME, "Decimal separator")
 clear = (By.NAME, "Clear")
 clear_entry = (By.NAME, "Clear entry")
 backspace = (By.NAME, "Backspace")
-negate = (By.NAME, "Negate")
+negate = (By.XPATH, "//*[@AutomationId='negateButton']")
 percentage = (By.NAME, "Percent")
 answer = (By.XPATH, "//*[@AutomationId='CalculatorResults']")
 

@@ -15,6 +15,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from utilities.common_ops import get_data
 from utilities.event_listener import EventListener
 from utilities.manage_pages import ManagePages
+from workflows.desktop_flows import DesktopFlows
 
 driver = None
 action = None
@@ -141,3 +142,8 @@ def go_home(init_web_driver):
 @pytest.fixture(scope="function")
 def reset_app(init_mobile_driver):
     driver.reset()
+
+# Resets calculator to 0
+@pytest.fixture(scope="function")
+def clear_calc():
+    DesktopFlows.step_click_clear()
