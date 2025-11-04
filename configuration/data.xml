@@ -41,4 +41,7 @@
     <!-- Desktop -->
     <APPLICATION_NAME>Microsoft.WindowsCalculator_8wekyb3d8bbwe!App</APPLICATION_NAME>
     <WINAPP_DRIVER_SERVICE>http://127.0.0.1:4723</WINAPP_DRIVER_SERVICE>
+
+    <!-- Data Base -->
+    <DB_PATH></DB_PATH>
 </ENVIORNMENT>

@@ -1,3 +1,4 @@
+import sqlite3
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -76,6 +77,14 @@ def init_desktop_driver(request):
     ManagePages.init_desktop_pages()
     yield
     driver.quit()
+
+@pytest.fixture(scope='class')
+def init_db_driver(request):
+    global my_db
+    my_db = sqlite3.connect(get_data("DB_PATH"))
+    request.cls.my_db = my_db
+    yield
+    my_db.quit()
 
 
 def get_web_driver():
