@@ -22,6 +22,7 @@ driver = None
 action = None
 mobile_size = None
 web_driver = get_data("BROWSER")
+conn = None
 
 
 @pytest.fixture(scope='class')
@@ -54,6 +55,7 @@ def init_mobile_driver(request):
     yield
     driver.quit()
 
+
 @pytest.fixture(scope='class')
 def init_electron_driver(request):
     edriver = get_electron_driver()
@@ -67,6 +69,7 @@ def init_electron_driver(request):
     yield
     driver.quit()
 
+
 @pytest.fixture(scope='class')
 def init_desktop_driver(request):
     edriver = get_desktop_driver()
@@ -78,13 +81,17 @@ def init_desktop_driver(request):
     yield
     driver.quit()
 
+
 @pytest.fixture(scope='class')
 def init_db_driver(request):
-    global my_db
-    my_db = sqlite3.connect(get_data("DB_PATH"))
-    request.cls.my_db = my_db
+    global conn
+    db_path = get_data("DB_PATH")
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys = ON")
+    request.cls.my_db = conn
     yield
-    my_db.quit()
+    conn.close()
 
 
 def get_web_driver():
@@ -110,19 +117,22 @@ def get_mobile_driver():
         raise Exception("Wrong Input, Driver Is None")
     return driver
 
+
 def get_electron_driver():
     options = selenium.webdriver.ChromeOptions()
     options.binary_location = get_data("ELECTRON_APP")
     driver = selenium.webdriver.Chrome(chrome_options=options, executable_path=get_data("ELECTRON_DRIVER"))
     return driver
 
+
 def get_desktop_driver():
     dc = {}
     dc['app'] = get_data("APPLICATION_NAME")
     dc['platformName'] = "Windows"
     dc['deviceName'] = "WindowsPC"
-    driver = appium.webdriver.Remote(get_data("WINAPP_DRIVER_SERVICE"),dc)
+    driver = appium.webdriver.Remote(get_data("WINAPP_DRIVER_SERVICE"), dc)
     return driver
+
 
 def get_android(udid):
     dc = {}
@@ -142,15 +152,18 @@ def get_ios(udid):
     ios_driver = appium.webdriver.Remote(get_data("APPIUM_SERVER"), dc)
     return ios_driver
 
+
 # Returns back to home web site
 @pytest.fixture(scope="function")
 def go_home(init_web_driver):
     driver.get(get_data("WEB_URL"))
 
+
 # Resets mobile APP
 @pytest.fixture(scope="function")
 def reset_app(init_mobile_driver):
     driver.reset()
+
 
 # Resets calculator to 0
 @pytest.fixture(scope="function")

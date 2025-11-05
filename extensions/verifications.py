@@ -16,9 +16,16 @@ class Verifications:
     def is_displayed(elem: WebElement):
         assert elem.is_displayed(), "is_displayed Failed - Element is not displayed"
 
-    # Verify top navbar buttons using smart-assert
     @staticmethod
     def soft_assert(elems):
         for i in range(len(elems)):
             soft_assert(elems[i].is_displayed())
         verify_expectations()
+
+    @staticmethod
+    def verify_true(statement: bool):
+        assert statement, f"The Test Failed. {statement} is false"
+
+    @staticmethod
+    def verify_false(statement: bool):
+        assert not statement, f"The Test Failed. {statement} is true"

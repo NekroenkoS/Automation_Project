@@ -43,5 +43,7 @@
     <WINAPP_DRIVER_SERVICE>http://127.0.0.1:4723</WINAPP_DRIVER_SERVICE>
 
     <!-- Data Base -->
-    <DB_PATH></DB_PATH>
+    <DB_PATH>C:\Users\USER\PycharmProjects\Automation_Project\configuration\users.db</DB_PATH>
+    <DB_USER>sergey1</DB_USER>
+    <DB_PASSWORD>123456</DB_PASSWORD>
 </ENVIORNMENT>
