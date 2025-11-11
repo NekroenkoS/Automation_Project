@@ -19,7 +19,6 @@ class DbFlows:
             Verifications.verify_true("UNIQUE" in str(e))
             return True
 
-
     @staticmethod
     @allure.step("DB • Create user: {name}")
     def create_user(name: str, password: str) -> int:

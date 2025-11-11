@@ -1,7 +1,7 @@
 from extensions.ui_actions import UiActions
 import test_cases.conftest as conf
 
-
+# Common Mobile interaction helpers for readability and consistency
 class MobileActions(UiActions):
 
     @staticmethod

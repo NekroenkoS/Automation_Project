@@ -1,7 +1,7 @@
 from selenium.webdriver.remote.webelement import WebElement
 from smart_assertions import soft_assert, verify_expectations
 
-
+# Centralized verification helpers for readability + consistent failure messages
 class Verifications:
 
     @staticmethod

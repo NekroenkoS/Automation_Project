@@ -1,9 +1,4 @@
-import sqlite3
-import xml.etree.ElementTree as ET
-from pathlib import Path
-
 import appium.webdriver
-import pytest
 import selenium
 from appium.webdriver.common.touch_action import TouchAction
 from selenium import webdriver
@@ -18,13 +13,35 @@ from utilities.event_listener import EventListener
 from utilities.manage_pages import ManagePages
 from workflows.desktop_flows import DesktopFlows
 
+from pathlib import Path
+import os
+import sqlite3
+import pytest
+
 driver = None
 action = None
 mobile_size = None
 web_driver = get_data("BROWSER")
 conn = None
 
+# Ensure PROJECT_ROOT is always defined
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+os.environ.setdefault("PROJECT_ROOT", str(PROJECT_ROOT))
 
+
+def resolve_project_path(p: str) -> Path:
+    """Resolve DB path from XML to an absolute path."""
+    # Expand ${VARS} and ~
+    expanded = os.path.expandvars(os.path.expanduser(p.strip()))
+    # If it is already absolute, use as-is
+    abs_candidate = Path(expanded)
+    if abs_candidate.is_absolute():
+        return abs_candidate
+
+    # Otherwise treat it as relative to project root
+    return (PROJECT_ROOT / expanded).resolve()
+
+# Web UI driver setup (Chrome/Firefox/Edge) + Page Objects
 @pytest.fixture(scope='class')
 def init_web_driver(request):
     edriver = get_web_driver()
@@ -38,7 +55,7 @@ def init_web_driver(request):
     yield
     driver.quit()
 
-
+# Mobile driver setup (Android / iOS) + Page Objects + gestures
 @pytest.fixture(scope='class')
 def init_mobile_driver(request):
     edriver = get_mobile_driver()
@@ -55,7 +72,7 @@ def init_mobile_driver(request):
     yield
     driver.quit()
 
-
+# Electron app driver setup + Page Objects
 @pytest.fixture(scope='class')
 def init_electron_driver(request):
     edriver = get_electron_driver()
@@ -69,7 +86,7 @@ def init_electron_driver(request):
     yield
     driver.quit()
 
-
+# Native Windows desktop app driver setup + Page Objects
 @pytest.fixture(scope='class')
 def init_desktop_driver(request):
     edriver = get_desktop_driver()
@@ -81,11 +98,12 @@ def init_desktop_driver(request):
     yield
     driver.quit()
 
-
+# Database connection setup for DB tests
 @pytest.fixture(scope='class')
 def init_db_driver(request):
     global conn
-    db_path = get_data("DB_PATH")
+    raw_db_path = get_data("DB_PATH")
+    db_path = resolve_project_path(raw_db_path)
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
@@ -93,7 +111,7 @@ def init_db_driver(request):
     yield
     conn.close()
 
-
+# Returns a Selenium WebDriver instance based on browser config
 def get_web_driver():
     if web_driver.lower() == "chrome":
         driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -106,7 +124,7 @@ def get_web_driver():
         raise Exception('Wrong input - unrecognized browser')
     return driver
 
-
+# Returns Appium driver based on configured mobile OS
 def get_mobile_driver():
     if get_data("MOBILE_DEVICE").lower() == "android":
         driver = get_android(get_data("UDID"))
@@ -117,14 +135,14 @@ def get_mobile_driver():
         raise Exception("Wrong Input, Driver Is None")
     return driver
 
-
+# Returns Electron WebDriver for desktop UI testing
 def get_electron_driver():
     options = selenium.webdriver.ChromeOptions()
     options.binary_location = get_data("ELECTRON_APP")
     driver = selenium.webdriver.Chrome(chrome_options=options, executable_path=get_data("ELECTRON_DRIVER"))
     return driver
 
-
+# Returns WinAppDriver session for Windows desktop app testing
 def get_desktop_driver():
     dc = {}
     dc['app'] = get_data("APPLICATION_NAME")

@@ -1,6 +1,6 @@
 from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
 
-
+# Custom WebDriver event listener for logging browser actions
 class EventListener(AbstractEventListener):
     button_text = None
 

@@ -9,8 +9,6 @@ from extensions.verifications import Verifications
 
 class DesktopFlows:
 
-
-
     @staticmethod
     @allure.step("Calculating Equation")
     def step_calculate_flow(equation):
@@ -26,6 +24,7 @@ class DesktopFlows:
         Verifications.verify_equals(actual_num, expected_num)
 
     @staticmethod
+    # Click a single calculator key by char (digits/operators)
     def click_on_calculator(char):
         mapping = {
             '0': lambda: UiActions.click(page.calculator_standard_page.get_zero_element()),
@@ -51,8 +50,6 @@ class DesktopFlows:
             raise ValueError(f"Invalid char: {char}. Supported: digits 0–9 and operators +, -, *, /, =,.")
 
         mapping[char]()
-
-
 
     @staticmethod
     @allure.step("Clicking on clear")

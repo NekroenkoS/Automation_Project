@@ -1,5 +1,3 @@
-import json
-
 import allure
 
 from extensions.api_actions import APIActions

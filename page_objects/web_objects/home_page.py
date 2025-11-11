@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+# Locators for product links on the Home page
 galaxy_s6_product_page = (By.LINK_TEXT, "Samsung galaxy s6")
 nokia_lumia_1520_product_page = (By.LINK_TEXT, "Nokia lumia 1520")
 nexus_6_product_page = (By.LINK_TEXT, "Nexus 6")

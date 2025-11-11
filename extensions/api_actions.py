@@ -1,8 +1,11 @@
+import operator
+from functools import reduce
+
 import requests
 
 header = {'x-api-key': 'reqres-free-v1', 'Content-Type': 'application/json'}
 
-
+# Common API interaction helpers for readability and consistency
 class APIActions:
 
     @staticmethod
@@ -12,15 +15,8 @@ class APIActions:
 
     @staticmethod
     def extract_value_from_response(response, nodes):
-        extracted_value = None
         response_json = response.json()
-        if len(nodes) == 1:
-            extracted_value = response_json[nodes[0]]
-        elif len(nodes) == 2:
-            extracted_value = response_json[(nodes[0])][(nodes[1])]
-        elif len(nodes) == 3:
-            extracted_value = response_json[(nodes[0])][(nodes[1])][(nodes[2])]
-        return extracted_value
+        return reduce(operator.getitem, nodes, response_json)
 
     @staticmethod
     def post(path, payload):

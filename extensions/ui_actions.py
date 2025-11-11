@@ -1,6 +1,6 @@
 from selenium.webdriver.remote.webelement import WebElement
 
-
+# Common UI interaction helpers for readability and consistency
 class UiActions:
 
     @staticmethod

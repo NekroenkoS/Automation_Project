@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 
 from test_cases import conftest as conf
 
-
+# Common DB interaction helpers for readability and consistency
 class DbActions:
 
     @staticmethod

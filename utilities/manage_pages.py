@@ -39,6 +39,7 @@ electron_task_page = None
 calculator_standard_page = None
 
 
+# Initializes and stores page object instances for all platforms
 class ManagePages:
     @staticmethod
     def init_web_pages():
