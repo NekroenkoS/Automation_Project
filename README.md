@@ -1,6 +1,7 @@
 # <a name="header"></a><a name="content"></a><a name="automation-project"></a>Automation Project
 ## <a name="overview"></a>Overview
-This repository contains a **multi‑platform automation framework** built in Python. It exercises different types of applications—including web sites, native mobile apps, REST APIs, Electron desktop apps, Windows desktop programs and a SQLite database—and reports results using the Allure reporting framework. Tests are written with pytest and follow a structured Page‑Object‑Model (POM) and flow layer design. The project is configured via an XML file that specifies parameters for each platform (browser, mobile device, API base URL, Electron app, Windows app and database path)[\[1\]](https://github.com/NekroenkoS/Automation_Project/blob/master/configuration/data.xml#L7-L48).
+This repository contains a **multi‑platform automation framework** built in Python. It exercises different types of applications—including web sites, native mobile apps, REST APIs, Electron desktop apps, Windows desktop programs and a SQLite database—and reports results using the Allure reporting framework. Tests are written with pytest and follow a structured Page‑Object‑Model (POM) and flow layer design. The project is configured via an XML file that specifies parameters for each platform (browser, mobile device, API base URL, Electron app, Windows app and database path)[\[1\]](https://github.com/NekroenkoS/Automation_Project/blob/master/configuration/data.xml#L7-L48).  
+Video demo of some of the tests and allure reports - https://drive.google.com/file/d/1maU54kDlFTfmzlX2Fwt1O9th9PQCro-F/view?usp=sharing
 ## <a name="features"></a>Features
 The automation framework is organised into several logical layers. Key features include:
 
